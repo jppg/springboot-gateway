@@ -1,0 +1,53 @@
+SPRING CLOUD GATEWAY
+
+PRE FILTER
+
+Auth JWT
+https://github.com/zdb17173/spring-cloud-hoxton/blob/260283c88f9f739461c87615e00ddad7077e4b63/spring-cloud-gateway-example/src/main/java/org/fran/springcloud/gateway/filter/AuthFilter.java
+
+
+--> calling external endpoint
+https://github.com/bob-park/study-spring-cloud-msa/blob/9cc77857fd8866dce4c12f2b1a2b1c748d6fd484/zuul-server/src/main/java/com/spmia/zuulserver/commons/filter/SpecialRoutesFilter.java
+
+--> Gateway filter
+https://github.com/krishnaramachandran1973/pharmacy-gateway/blob/b1d5df7376fcef59fc79b5d0d8f4d23c4cf3571a/src/main/java/com/cts/filter/AuthenticationFilter.java
+
+https://stackoverflow.com/questions/50223891/how-to-extract-response-header-status-code-from-spring-5-webclient-clientrespo
+
+
+https://gustavopeiretti.com/spring-boot-how-to-use-webclient/
+
+https://www.sobyte.net/post/2021-07/spring-cloud-gateway-serverwebexchange-core-methods-and-request-or-response-content-modification/
+https://stackoverflow.com/questions/64439102/how-to-get-response-body-in-spring-gateway
+
+/*
+        ServerHttpRequest request = exchange.getRequest();
+        ServerHttpResponse response = exchange.getResponse();
+        HttpHeaders headers = response.getHeaders();
+
+        WebClient.create()
+                .get()
+                .uri("http://localhost:8080/authz")
+                .retrieve()
+                .toEntity(Authz.class)
+                .subscribe(
+                        authResponse -> {
+                            Authz authz = authResponse.getBody();
+
+                            if (authz.allow)
+                                response.setStatusCode(HttpStatus.OK);
+                            else
+                                response.setStatusCode(HttpStatus.UNAUTHORIZED);
+
+                            System.out.println("Body: " + authResponse.getBody().toString());
+                            System.out.println("Allow: " + authz.allow);
+                            System.out.println("Response: " + response.getStatusCode());
+                        },
+                        ex -> System.out.println(ex.getMessage()));
+
+
+        if(response.getStatusCode() == HttpStatus.UNAUTHORIZED)
+            return response.setComplete();
+
+        return chain.filter(exchange);
+        */
